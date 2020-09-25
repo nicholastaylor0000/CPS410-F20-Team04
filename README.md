@@ -10,8 +10,10 @@ Julia Fitzgerald | Developer
 Niels Lashbrook | Developer
 
 ## Key Users
-John at Alpine
+John at Alpine (for the moment)
 
 ## Key Features
-
 Will be added upon speaking with John at Alpine for requirements
+
+## Installation
+Will add upon learning more

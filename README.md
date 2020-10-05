@@ -1,5 +1,5 @@
 # CPS410-F20-Team04
-Heroku Score Tracker API
+Paragalactic Scheduler and App
 
 ## Group Members
 Name | Role

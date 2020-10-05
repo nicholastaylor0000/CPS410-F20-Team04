@@ -1,5 +1,5 @@
 # CPS410-F20-Team04
-International Real Estate Web Development Project
+Heroku Score Tracker API
 
 ## Group Members
 Name | Role
@@ -10,10 +10,15 @@ Julia Fitzgerald | Developer
 Niels Lashbrook | Developer
 
 ## Key Users
-John at Alpine (for the moment)
+Museum Visitors for Flight Simulator
 
 ## Key Features
-Will be added upon speaking with John at Alpine for requirements
+1) be able to have a online waiting list
+2) be able to pay online
+3) get reminders on your phone (must have through mobile app, through text would be nice)
+4) being able to forfeit your timeslot, get reassigned another one.
+5) mobile app to show leaderboard & your profile
+6) link to twitch for gamestream
 
 ## Installation
 Will add upon learning more

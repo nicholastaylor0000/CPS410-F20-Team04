@@ -1,0 +1,10 @@
+{% extends "game/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>Create PDF of profiles for {{ museum.name }}</h1>
+    <form method='post'>
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" value="Create group">
+    </form>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends "game/base.html" %}
+{% block content %}
+    <a href="{% url 'museum-detail' group.museum.id %}">{{group.museum.name}}</a>
+    <h1>{{ group.name }}</h1>
+    <form method="get" action="{% url 'group-pdf' group.id %}">
+        <input type="submit" class="btn btn-primary" value="Print QR codes">
+    </form>
+    <h1>Users</h1>
+    <table class="table" id="myTable">
+        <thead>
+          <tr>
+            <th>username</th>
+            <th>Total Number of Rides</th>
+            <th>Total Time</th>
+            <th>High Score</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for profile in group.profiles.all %}
+          <tr>
+            {% if profile.user %}
+                <td>{{profile.display_name}}</td>
+            {% else %}
+                <td>
+                    <form action="{% url 'set-temp-name' group.id%}" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="id" value="{{profile.id}}" hidden>
+                        <input type="text" name="name" placeholder="{{profile.display_name}}" autofocus>
+                        <input type="submit" value="set">
+                    </form>
+                </td>
+            {% endif %}         
+            <td>{{profile.total_rides}}</td>
+            <td>{{profile.total_time}}</td>
+            <td>{{profile.high_score}}</td>
+            {% if profile.is_unused %}
+              <td>
+                <form action="{% url 'delete-profile' group.id %}" method="post">
+                  {% csrf_token %}
+                  <input type="text" value="{{profile.id}}" name="pk" hidden>
+                  <input type="submit" class="btn btn-warning" value="Delete">
+                </form>
+              </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <form action="{% url 'create-profile' group.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="add Profile">
+      </form>
+{% endblock content %}

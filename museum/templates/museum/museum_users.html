@@ -1,0 +1,46 @@
+{% extends "museum/museum_base.html" %}
+{% block museum_content %}
+    <h1>{{museum.name}} users</h1>
+    <div class="">
+      <form class="content-section" method="get">
+        <input type="radio" name="filter" checked=True> all
+        <input type="radio" name="filter" value="reg"> registered
+        <input type="radio" name="filter" value="unreg"> unregistered
+        <label for="search"></label>
+        <input type="text" name="search" value="">
+        <input type="submit" value="search" class="btn btn-submit">
+      </form>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th><a href="{% url 'museum-manage-users' museum.id %}{{col_urls.0}}">Date Created</a></th>
+          <th><a href="{% url 'museum-manage-users' museum.id %}{{col_urls.1}}">Username</a></th>
+          <th><a href="{% url 'museum-manage-users' museum.id %}{{col_urls.2}}">Number of Rides</a></th>
+          <th>Manage users</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for profile in profiles %}
+        <tr>
+          <td>{{profile.date_created}}</td>
+          <td>{{profile.display_name}}</td>
+          <td>{{profile.num_rides}}</td>
+          <td>
+            {% if profile.user is not None %}
+              <form action="{% url 'toggle-hide' museum.id %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="profile" value="{{profile.user.id}}" hidden>
+                {% if profile.user.id in hidden %}
+                  <input type="submit" class="btn btn-danger" name="unhide" value="Unhide user">
+                {% else %}
+                  <input type="submit" class="btn btn-success" name="hide" value="Hide user">
+                {% endif %}
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock museum_content %}

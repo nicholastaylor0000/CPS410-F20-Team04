@@ -1,0 +1,33 @@
+{% extends "game/base_leaderboard.html" %}
+{% block leaderboard %}
+{% if museum %}
+  <h1>{{museum.name}} Top Users</h1>
+  <p><a href="{% url 'museum-detail' museum.id %}">{{museum.name}}</a></p>
+  <a href="{% url 'museum-leaderboard-scores' museum.id %}">Scores Leaderboard</a>
+{% else %}
+  <h1>Top Users</h1>
+  <a href="{% url 'leaderboard' %}">Scores Leaderboard</a>
+{% endif %}
+<table class="table" id="myTable">
+  <thead>
+    <tr>
+      <th><a href="{{request.path}}{{col_urls.0}}">{{column_names.0}}</a></th>
+      <th><a href="{{request.path}}{{col_urls.1}}">{{column_names.1}}</a></th>
+      <th><a href="{{request.path}}{{col_urls.2}}">{{column_names.2}}</a></th>
+      <th><a href="{{request.path}}{{col_urls.3}}">{{column_names.3}}</a></th>
+      <th><a href="{{request.path}}{{col_urls.4}}">{{column_names.4}}</a></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{user.display_name}}</td>
+      <td>{{user.num_games_pilot}}</td>
+      <td>{{user.num_games_copilot}}</td>
+      <td>{{user.total_score_pilot}}</td>
+      <td>{{user.total_score_copilot}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock leaderboard %}

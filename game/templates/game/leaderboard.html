@@ -1,0 +1,16 @@
+{% extends "game/base.html" %}
+{% load render_table from django_tables2 %}
+{% load bootstrap3 %}
+{% block content %}
+<a data-toggle="collapse" href="#searchform" role="button" aria-expanded="false" aria-controls="collapseExample">
+    search
+</a>
+<div class="collapse" id="searchform">
+    <form method="get" form="form form-inline">
+        {% bootstrap_form filter.form layout='inline' %}
+        {% bootstrap_button 'filter' %}
+    </form>
+</div>
+
+{% render_table table %}
+{% endblock content %}

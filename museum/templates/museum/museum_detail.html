@@ -1,0 +1,44 @@
+{% extends "game/base.html" %}
+{% block content %}
+    <h1>{{ museum.name }}</h1>
+    <p>This museum has {{ museum.num_sims }} activities being tracked</p>
+    <a class="btn btn-primary" href="{% url 'museum-leaderboard-users' museum.id %}">Museum leaderboard</a>
+    <a class="btn btn-primary" href="{% url 'museum-live-results' museum.id %}">Museum Live Results</a>
+    {% if user in museum.admins.all %}
+      <h2>museum api info</h2>
+      <a data-toggle="collapse" href="#apidetail" role="button" aria-expanded="false" aria-controls="collapseExample">
+        api details
+      </a>
+      <div class="collapse" id="apidetail">
+        {% for id, img in museum.get_secret_QR_embedded %}
+        <p>
+          <label for="sim_{{id}}">simulator {{id}}</label>
+          <img src="data:image/png;base64, {{img}}", id="sim_{{id}}"/>
+        </p>
+        
+        {% endfor %}
+      </div>   
+      <div class="content-section">
+        <a class="btn btn-primary" href="{% url 'museum-manage-users' museum.id %}">Manage users</a>
+        <a class="btn btn-primary" href="{% url 'museum-create-group' museum.id %}">Create Group</a>
+      </div>
+      <h2>Groups:</h2>
+      {% for group in museum.group_set.all %}
+      <div class="content-section row">
+        <div class="col-md-10">
+          <h5 class="card-title">{{group.name}}</h5>
+          <a href="{% url 'group-leaderboard' group.id %}" class="btn btn-primary">Leaderboard</a>
+          <a href="{% url 'group-detail' group.id %}" class="btn btn-primary">Manage Group</a>
+          <p>{{group.profiles.count}} members</p>
+        </div>
+        <div class="col-md-2">
+          <form action="{% url 'museum-delete-group' museum.id %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="id" value="{{group.id}}" hidden>
+            <input type="submit" class="btn btn-warning" value="delete group">
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+{% endblock content %}

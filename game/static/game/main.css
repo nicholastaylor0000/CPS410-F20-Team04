@@ -1,0 +1,79 @@
+.bg-nasa-blue {
+  background-color: #0B3D91;
+}
+
+.bg-nasa-orange {
+  background-color: #FC3D21
+}
+
+body {
+  background-image: url("stars.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #cccccc;
+  margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6, p, label {
+  color: #ffffff;
+}
+a, btn-link {
+  color: #8c6ad7;
+}
+
+table {
+
+  color: #ffffff
+}
+#myTable{
+     border:1px solid white;
+}
+table.dataTable tbody tr {
+	background-color: rgba(0,0,0,0.85);
+}
+ul {
+  margin: 0;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  color:#ffffff;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+#myTable_info {
+	color: white;
+}
+
+#myTable_previous {
+    color:white;
+}
+#myTable_next {
+	color: white;
+}

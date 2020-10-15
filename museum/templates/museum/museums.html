@@ -1,0 +1,8 @@
+{% extends "game/base.html" %}
+{% block content %}
+    <h1>Museums</h1>
+    {% for museum in museums %}
+      <h2><a href="{% url 'museum-detail' museum.id %}">{{ museum.name }}</a></h2>
+      <p>has {{ museum.num_sims }} simulators</p>
+    {% endfor %}
+{% endblock content %}

@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+
 {% extends "game/base.html" %}
 {% block content %}
     <a href="{% url 'museum-detail' group.museum.id %}">{{group.museum.name}}</a>
@@ -52,3 +55,5 @@
         <input type="submit" class="btn btn-primary" value="add Profile">
       </form>
 {% endblock content %}
+
+</html>

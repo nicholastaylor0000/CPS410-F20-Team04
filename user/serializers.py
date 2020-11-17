@@ -3,12 +3,16 @@ from .models import UserProfile
 from badges.models import get_users_badge_tiers
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    display_name = serializers.SerializerMethodField()
     high_score = serializers.SerializerMethodField()
     badges = serializers.SerializerMethodField()
     
     class Meta:
         model = UserProfile
         fields = ('display_name', 'high_score', 'badges')
+
+    def get_display_name(self, instance):
+        return instance.display_name()
 
     def get_high_score(self, instance):
         return instance.high_score()
@@ -24,4 +28,3 @@ class UserProfileSerializer(serializers.ModelSerializer):
                 badge_tiers
             )
         )
-

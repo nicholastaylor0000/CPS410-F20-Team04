@@ -15,19 +15,20 @@ class UserProfile(models.Model):
     image = models.ImageField(default='default.png', upload_to='profile_pics')
     date_created = models.DateTimeField(auto_now_add=True)
     is_before_user = models.BooleanField(default=True)
-    display_name = models.CharField(max_length=50, blank=True)
+    
+    display_name = models.CharField(max_length=20, blank=True)
     # The name that will show up on the leaderboard
     is_confirmed = models.BooleanField(default=False)   
-    ###, email confirmation, like confirming this is your account and intended to login
+    # Email confirmation, like confirming this is your account and intended to login
     confirm_token = models.CharField(max_length=24, unique=True) 
-    ## for url address, a unique token for identifying 
+    # For url address, a unique token for identifying 
 
     def __str__(self):
         if self.user is None:
             return f'{self.qr_token} Profile'
         return f'{self.user.username} Profile'
 
-    def save(self, *args, **kwargs):  
+    def save(self, *args, **kwargs):
         ## save built in function for model, to save any
         if not self.qr_token:
             self.qr_token = secrets.token_hex(12)    
@@ -84,8 +85,7 @@ class UserProfile(models.Model):
         for gr in self.get_games():
             for bt in gr.badgetier_set.all():
                 badges.add(bt.badge.guid)
-        return tuple(badges)
-        
+        return tuple(badges)     
 
 def delete_overdue_profiles():   
     ##delete the profile user, if it's never been; For now it's being checked if the profile hasn't been used for at least 30 days

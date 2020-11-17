@@ -50,6 +50,10 @@ class Simulator(models.Model):  ##one museum can have have multiple simulators
     def __str__(self):
         return self.name
 
+    @property
+    def get_museum(self):
+        return self.museum
+
 class Group(models.Model):   ##Profiles can be grouped by the museum admin
     name = models.CharField(max_length=50, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)

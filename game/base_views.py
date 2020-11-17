@@ -65,10 +65,10 @@ class UserTable(ListView):
 
     column_names = (
         'Username',
-        'Number of Games as pilot',
-        'Number of Games as copilot',
-        'Total Score as pilot',
-        'Total Score as copilot',
+        'Games played as Pilot',
+        'Games played as Copilot',
+        'Total Score as Pilot',
+        'Total Score as Copilot',
     )
 
     def get_queryset(self):

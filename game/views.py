@@ -24,6 +24,16 @@ def live_results(request):
         },
     )
 
+def home(request):
+    return render(
+        request,
+        'game/home.html',
+        {
+            'group_name': 'all',
+            'group_name_json': mark_safe(json.dumps('all')),
+        },
+    )
+
 
 class LeaderboardScores(ScoresTable):
     template_name = 'game/scores_leaderboard.html'

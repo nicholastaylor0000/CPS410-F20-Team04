@@ -1,33 +1,110 @@
+<!DOCTYPE html>
+<html>
+
 {% extends "game/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <a data-toggle="collapse" href="#searchform" role="button" aria-expanded="false" aria-controls="collapseExample">
-        search
-    </a>
-    <div class="collapse" id="searchform">
-        <form method="get" class="content-section">
-            {{form|crispy}}
-            <input type="submit" value="search" class="btn btn-submit">
-        </form>
+
+<head>
+    <style type="text/css">
+
+        .search {
+            font-family: "Lucida Console";
+            font-size: 30px;
+            color: #ffffff;
+        }
+
+        .pagination {
+            font-family: "Lucida Console";
+            font-size: 16px;
+            color: #ffffff;
+        }
+        
+        .title {
+            background-color: transparent;
+            font-family: "Lucida Console";
+            font-size: 30px;
+            color: #ffffff;
+        }
+
+        .main {
+            width: 100%;
+            font-family: "Lucida Console";
+            font-size: 14px;
+            text-align: left;
+        }
+
+        table, tr, th, td {
+            border-bottom: 1px solid #ffffff;
+            padding: 10px;
+            color: #ffffff;
+        }
+            thead {
+                background-color:  #2b1942;
+            }
+            thead a {
+                color: #47daff;
+                    -webkit-transition: all 1s ease;
+                    -moz-transition: all 1s ease;
+                    -o-transition: all 1s ease;
+            }
+            thead a:hover {
+                color: #af8ccf;
+            }
+            tbody {
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+
+    </style>
+</head>
+
+<body>
+    
+    <div class="search">
+
+        <!--<a data-toggle="collapse" 
+        href="#searchform" 
+        role="button" 
+        aria-expanded="false" 
+        aria-controls="collapseExample">
+            <p>Search&nbsp;</p></a>
+
+        <div class="collapse" id="searchform">
+            <form method="get" class="content-section">
+                {{form|crispy}}
+                <input type="submit" value="search" class="btn btn-submit">
+            </form>
+        </div>-->
+
     </div>
-    {% block leaderboard %}{% endblock leaderboard %}
+
+    {% block leaderboard %}
+    {% endblock leaderboard %}
+
     <div class="pagination">
-      <p>
-      <span class="step-links">
-          {% if page_obj.has_previous %}
-              <a href="?page=1" class="btn">&laquo; first</a>
-              <a href="?page={{ page_obj.previous_page_number }}" class="btn">previous</a>
-          {% endif %}
-  
-          <span class="current">
-              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-          </span>
-  
-          {% if page_obj.has_next %}
-              <a href="?page={{ page_obj.next_page_number }}" class="btn">next</a>
-              <a href="?page={{ page_obj.paginator.num_pages }}" class="btn">last &raquo;</a>
-          {% endif %}
-      </span>
-    </p>
-  </div>
+
+        <p></br>
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn">last &raquo;</a>
+            {% endif %}
+        </span>
+        </p>
+
+    </div>
+
+</body>
+
 {% endblock content %}
+
+</html>

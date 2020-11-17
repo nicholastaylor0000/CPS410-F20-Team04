@@ -1,17 +1,28 @@
+<!DOCTYPE html>
+<html>
+
 {% extends "game/base_leaderboard.html" %}
 {% block leaderboard %}
-{% if museum %}
-<h1>{{museum.name}} Top Scores</h1>
-<p><a href="{% url 'museum-detail' museum.id %}">{{museum.name}}</a></p>
-<a href="{% url 'museum-leaderboard-users' museum.id %}">Users Leaderboard</a>
-{% elif group %}
-<h1>{{group.name}} Leaderboard</h1>
-{% else %}
-<h1>Top Scores</h1>
-<a href="{% url 'leaderboard-users' %}">Users Leaderboard</a>
-{% endif %}
 
-<table class="table" id="myTable">
+<div class="title">
+
+  {% if museum %}
+    <p>&nbsp;Top Scores at
+      <a href="{% url 'museum-detail' museum.id %}">{{museum.name}} </a>
+      (<a href="{% url 'museum-leaderboard-users' museum.id %}">Swap Leaderboard</a>)</p>
+
+  {% elif group %}
+    <p>&nbsp;{{group.name}} Leaderboard</p>
+
+  {% else %}
+    <p>&nbsp;Top Scores (<a href="{% url 'leaderboard-users' %}">Swap Leaderboard</a>)</p>
+
+  {% endif %}
+
+</div>
+
+<table class="main">
+
   <thead>
     <tr>
       <th><a href="{{request.path}}{{col_urls.0}}">{{column_names.0}}</a></th>
@@ -19,24 +30,28 @@
       <th><a href="{{request.path}}{{col_urls.2}}">{{column_names.2}}</a></th>
       <th><a href="{{request.path}}{{col_urls.3}}">{{column_names.3}}</a></th>
       <th><a href="{{request.path}}{{col_urls.4}}">{{column_names.4}}</a></th>
-      <th>Badges earned</th>
+      <th><a href="">Badges Earned</a></th>
     </tr>
   </thead>
+
   <tbody>
     {% for score in scores %}
     <tr>
-      <td>{{score.pilot.display_name}}</td>
-      <td>{{score.copilot.display_name}}</td>
+      <td>{% if score.pilot != None %}{{score.pilot.user.username}}{% endif %}</td>
+      <td>{% if score.copilot != None %}{{score.copilot.user.username}}{% endif %}</td>
       <td>{{score.simulator.museum}}</td>
       <td>{{score.start_time}}</td>
       <td>{{score.score}}</td>
       <td>
         {% for badge in score.badges %}
         <image src="{{badge.icon}}" style="width:32px;height:32px;" title="{{badge.badge.name}}" />
-        {% endfor %}
-      </td>
+        {% endfor %}</td>
     </tr>
     {% endfor %}
   </tbody>
+
 </table>
+
 {% endblock leaderboard %}
+
+</html>

@@ -1,26 +1,62 @@
+<!DOCTYPE html>
+<html>
+
 {% extends "game/base.html" %}
 {% block content %}
-<div class="col-md-6">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Badge</th>
-                <th>What you've earned</th>
-            </tr>
-        </thead>
-        {% for badge in badges %}
+
+<head>
+    <style type="text/css">
+
+        .main {
+            width: 50%;
+            font-family: "Lucida Console";
+            font-size: 16px;
+            color: #ffffff;
+            text-align: left;
+        }
+
+            table, tr, th, td {
+                border-bottom: 1px solid #ffffff;
+                padding: 10px;
+            }
+            thead {
+                background-color:  #2b1942;
+                color: #47daff;
+            }
+            tbody {
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+    
+    </style>
+</head>
+
+<table class="main">
+    <thead>
         <tr>
-            <td>
-                <image src="{{badge.badge.icon_incomplete}}" style="width:32px;height:32px;" />
-            </td>
-            <td>
-                {% if badge.tier %}
-                <image src="{{badge.tier.icon}}" style="width:32px;height:32px;" />
-                {% else %}
-                Not earned
-                {% endif %}
-            </td>
+            <th>Badge</th>
+            <th>Status</th>
         </tr>
-        {% endfor %}
-    </table>
-    {% endblock content %}
+    </thead>
+
+    {% for badge in badges %}
+
+    <tr>
+        <td>
+            <image src="{{badge.badge.icon_incomplete}}" style="width:32px;height:32px;"/>
+        </td>
+
+        <td>
+            {% if badge.tier %}
+                <image src="{{badge.tier.icon}}" style="width:32px;height:32px;"/>
+            {% else %}
+                Unearned
+            {% endif %}
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+{% endblock content %}
+
+</html>

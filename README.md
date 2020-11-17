@@ -1,24 +1,35 @@
-# CPS410-F20-Team04
-Paragalactic Scheduler and App
+# HerokuScoreTrackerAPI
+Paragalactic Leaderboard and Scheduler App - Setup Instructions 
 
-## Group Members
-Name | Role
----: | :---
-Nicholas Taylor | Developer / Repository Owner
-Brendan Fiorani | Developer
-Julia Fitzgerald | Developer
-Niels Lashbrook | Developer
+Mentioned Installations 
 
-## Key Users
-Museum Visitors for Flight Simulator
+Python v3.8.1: https://www.python.org/downloads/release/python-381/
 
-## Key Features
-1) be able to have a online waiting list
-2) be able to pay online
-3) get reminders on your phone (must have through mobile app, through text would be nice)
-4) being able to forfeit your timeslot, get reassigned another one.
-5) mobile app to show leaderboard & your profile
-6) link to twitch for gamestream
+Docker Desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/ 
 
-## Installation
-Will add upon learning more
+Docker Desktop (MAC): https://hub.docker.com/editions/community/docker-ce-desktop-mac/ 
+
+Upon Paul’s Recommendation: Postman: https://www.postman.com/downloads/ 
+
+Heroku CLI: https://devcenter.heroku.com/articles/heroku-cli 
+
+Git (required by Heroku CLI) : https://git-scm.com/downloads 
+
+C++ Build Tools (Error comes up for Twisted if you do not have this already installed, comes with many other programs so may already have a version of this): https://visualstudio.microsoft.com/visual-cpp-build-tools/ 
+
+SETUP:
+
+Clone HerokuScoreTrackerAPI onto Local Machine
+Make sure to also swap from the master branch to team04. If you want, you can also make a branch off of this branch when you push changes just to ensure you do not mess with what others are doing as you can then push that branch to our branch but TL:DR do not push our branch into master
+
+Using either Visual Studio Code PowerShell terminal or terminal application of choice, follow steps below. You can also make git changes from Visual Studio Code so in bottom left mind what branch you are in.
+python -m venv venv -> python virtual environment
+MAC:: “source <DIR>/bin/activate”  - WINDOWS :: “.\venv\Scripts\activate”
+“pip install –r requirements.txt”
+docker-compose up -d
+"python manage.py migrate"
+“python manage.py createsuperuser” - to access django admin from local client
+"python manage.py runserver"
+Ctrl+c to stop server while running in Terminal
+
+

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+{% extends "game/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<head>
+    <style type="text/css">
+
+        .filter {
+            width: 16%;
+            font-family: "Lucida Console";
+            font-size: 30px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .pagination {
+            font-family: "Lucida Console";
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+        .main {
+            width: 100%;
+            font-family: "Lucida Console";
+            font-size: 14px;
+            text-align: left;
+        }
+
+        table, tr, th, td {
+            border-bottom: 1px solid #ffffff;
+            padding: 10px;
+            color: #ffffff;
+        }
+            thead {
+                background-color:  #2b1942;
+            }
+            thead a {
+                color: #47daff;
+                    -webkit-transition: all 1s ease;
+                    -moz-transition: all 1s ease;
+                    -o-transition: all 1s ease;
+            }
+            thead a:hover {
+                color: #af8ccf;
+            }
+            tbody {
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+  
+    </style>
+</head>
+
+<body>
+
+  <div class="filter">
+    <a data-toggle="collapse" 
+      href="#filterform" 
+      role="button" 
+      aria-expanded="false" 
+      aria-controls="collapseExample">
+      <p>Filter</p></a>
+
+    <div class="collapse" id="filterform">
+      <form method="get" class="content-section">
+        {{form|crispy}}
+        <input type="submit" value="Apply Filter" class="btn btn-submit">
+      </form>
+    </br>
+    </div>
+  </div>
+
+  <table class="main">
+    <thead>
+      <tr>
+        <th><a href="{{request.path}}{{col_urls.0}}">{{column_names.0}}</a></th>
+        <th><a href="{{request.path}}{{col_urls.1}}">{{column_names.1}}</a></th>
+        <th><a href="{{request.path}}{{col_urls.2}}">{{column_names.2}}</a></th>
+        <th><a href="{{request.path}}{{col_urls.3}}">{{column_names.3}}</a></th>
+        <th><a href="{{request.path}}{{col_urls.4}}">{{column_names.4}}</a></th>
+        <th><a href="">{{column_names.5}}</a></th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      {% for event in events %}
+      <tr>
+        <td>{% if event.pilot != None %}{{event.pilot.user.username}}{% endif %}</td>
+        <td>{% if event.copilot != None %}{{event.copilot.user.username}}{% endif %}</td>
+        <td>{{event.simulator}}</td>
+        <td>{{event.simulator.museum}}</td>
+        <td>{{event.start}}</td>
+        <td>{% if event.is_claimed != True %}<a href="{% url 'payments' %}">Reserve</a>{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="pagination">
+
+    <p></br>
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+        <a href="?page=1" class="btn">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="btn">previous</a>
+      {% endif %}
+    
+      <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </span>
+    
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="btn">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="btn">last &raquo;</a>
+      {% endif %}
+    </span>
+    </p>
+
+  </div>  
+
+</body>
+
+{% endblock content %}
+
+</html>

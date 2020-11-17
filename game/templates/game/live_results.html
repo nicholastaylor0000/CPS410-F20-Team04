@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+
 {% extends "game/base.html" %} {% block content %}
 <h1>Live results: {{group_name}}</h1>
 <table class="table">
@@ -14,7 +17,7 @@
 
 <script>
   var protocol = '';
-  var roomName = {{ group_name_json }};
+  var roomName = { group_name_json };
 
   if (window.location.protocol === 'https:') {
     protocol = 'wss:';
@@ -66,3 +69,5 @@
 </script>
 
 {% endblock content %}
+
+</html>

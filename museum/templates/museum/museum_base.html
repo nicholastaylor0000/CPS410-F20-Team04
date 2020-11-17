@@ -1,6 +1,11 @@
+<!DOCTYPE html>
+<html>
+
 {% extends "game/base.html" %}
 {% block content %}
 <a href="{% url 'museum-detail' museum.id %}">{{museum.name}}</a>
 {% block museum_content%}
 {% endblock museum_content %}
 {% endblock content %}
+
+</html>

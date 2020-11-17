@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from user import views as user_views
+from scheduler import views as scheduler_views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -39,6 +40,9 @@ urlpatterns = [
     path('api/userinfo/<str:qr_token>',
          user_views.get_user_info, name='user-info'),
     path('badges/', include('badges.urls')),
+    path('payments/', include('payments.urls')),
+    path('scheduler/', include('scheduler.urls')),
+    path('paypal/', include('paypal.standard.ipn.urls')),
     path('', include('game.urls')),
 ]
 

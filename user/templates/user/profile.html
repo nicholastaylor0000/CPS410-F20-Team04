@@ -1,24 +1,80 @@
+<!DOCTYPE html>
+<html>
+
 {% extends "game/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="content-section">
-    <div class="media">
-      <img src="data:image/png;base64, {{user.userprofile.get_QR_embedded}}"/>
-      <div class="media-body">
-        <h1 class="account-heading">{{ user.username }}</h1>
-        <p class="text-secondary">{{ user.email }}</p>
-      </div>
+
+<head>
+  <style type="text/css">
+
+    .profile {
+      width: 55%;
+      margin-right: 30px;
+      padding: 20px 20px;
+      background-color: #2b1942;
+      font-family: "Lucida Console";
+      color:#ffffff;
+    }
+
+    .stats {
+      width: 40%;
+      height: 50%;
+      padding: 20px 20px;
+      background-color: #2b1942;
+      font-family: "Lucida Console";
+      color: #ffffff;
+    }
+
+  </style>
+</head>
+
+<div class="profile">
+
+  <div class="media">
+    <img src="data:image/png;base64, {{user.userprofile.get_QR_embedded}}"/>
+    <div class="media-body">
+      <h2>&nbsp;{{ user.username }}</h2>
+      <p>&nbsp;&nbsp;{{ user.email }}</p>
     </div>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Register</legend>
-        {{ u_form|crispy }}
-        {{ p_form|crispy }}
-      </fieldset>
-      <div class="form-group">
-        <button type="submit" class="btn btn-outline-info">Update</button>
-      </div>
-    </form>
   </div>
+
+  <form method="POST" enctype="multipart/form-data">
+    
+    {% csrf_token %}
+    <fieldset class="form-group">
+    </br><p>Register Account</p>
+      {{ u_form|crispy }}
+      {{ p_form|crispy }}
+    </fieldset>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-outline-info">Register</button>
+    </div>
+
+  </form>
+
+</div>
+
+{% if user.is_authenticated %}
+
+<div class="stats">
+
+  <h2>Statistics</h2>
+  
+  <p class='text-muted'>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-light">Total score: {{user.userprofile.total_score}}</li>
+      <li class="list-group-item list-group-item-light">Total rides: {{user.userprofile.total_rides}}</li>
+      <li class="list-group-item list-group-item-light">Total flight time: {{user.userprofile.total_time}} minutes</li>
+      <li class="list-group-item list-group-item-light">Top score: {{user.userprofile.high_score}}</li>
+    </ul>
+  </p>
+
+</div>
+
+{% endif %}
+
 {% endblock content%}
+
+</html>

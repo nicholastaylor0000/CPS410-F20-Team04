@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+{% extends 'game/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Make Payment{% endblock title %}
+
+{% block content %}
+
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div class="textBox">
+
+    <div id="text">
+        <p><b>Paragalactic</b></p>
+        <p>$20 for Hour Session</p>
+        {{ form.render }}
+    </div>
+        
+</div>
+
+{% endblock content %}
+
+</html>

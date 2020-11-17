@@ -1,14 +1,25 @@
+<!DOCTYPE html>
+<html>
+
 {% extends "game/base_leaderboard.html" %}
 {% block leaderboard %}
-{% if museum %}
-  <h1>{{museum.name}} Top Users</h1>
-  <p><a href="{% url 'museum-detail' museum.id %}">{{museum.name}}</a></p>
-  <a href="{% url 'museum-leaderboard-scores' museum.id %}">Scores Leaderboard</a>
-{% else %}
-  <h1>Top Users</h1>
-  <a href="{% url 'leaderboard' %}">Scores Leaderboard</a>
-{% endif %}
-<table class="table" id="myTable">
+
+<div class="title">
+
+  {% if museum %}
+    <p>&nbsp;Top Users at
+      <a href="{% url 'museum-detail' museum.id %}">{{museum.name}} </a>
+      (<a href="{% url 'museum-leaderboard-scores' museum.id %}">Swap Leaderboard</a>)</p>
+
+  {% else %}
+    <p>&nbsp;Top Users (<a href="{% url 'leaderboard-scores' %}">Swap Leaderboard</a>)</p>
+      
+  {% endif %}
+
+</div>
+
+<table class="main">
+
   <thead>
     <tr>
       <th><a href="{{request.path}}{{col_urls.0}}">{{column_names.0}}</a></th>
@@ -16,18 +27,27 @@
       <th><a href="{{request.path}}{{col_urls.2}}">{{column_names.2}}</a></th>
       <th><a href="{{request.path}}{{col_urls.3}}">{{column_names.3}}</a></th>
       <th><a href="{{request.path}}{{col_urls.4}}">{{column_names.4}}</a></th>
+      <th><a href="">Badges Earned</a></th>
     </tr>
   </thead>
+
   <tbody>
     {% for user in users %}
     <tr>
-      <td>{{user.display_name}}</td>
+      <td>{% if user.user != None %}{{user.user.username}}{% endif %}</td>
       <td>{{user.num_games_pilot}}</td>
       <td>{{user.num_games_copilot}}</td>
       <td>{{user.total_score_pilot}}</td>
       <td>{{user.total_score_copilot}}</td>
+      <td>{% for badge in user.badges %}
+          <image src="{{badge.icon}}" style="width:32px;height:32px;" title="{{badge.badge.name}}" />
+          {% endfor %}</td>
     </tr>
     {% endfor %}
   </tbody>
+
 </table>
+
 {% endblock leaderboard %}
+
+</html>

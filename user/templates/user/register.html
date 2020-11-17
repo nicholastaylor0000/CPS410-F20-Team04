@@ -1,6 +1,11 @@
+<!DOCTYPE html>
+<html>
+
 {% extends "game/base.html" %}
 {% load crispy_forms_tags %}
+
 {% block content %}
+
   <div class="content-section">
     <form method="post">
       {% csrf_token %}
@@ -18,4 +23,7 @@
       </small>
     </div>
   </div>
+
 {% endblock content%}
+
+</html>
